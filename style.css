@@ -1,0 +1,107 @@
+/* --- [ORIGINAL]: v5.2 --- */
+:root {
+    --primary: #ff4d6d;
+    --primary-glow: #ff758f;
+    --primary-dim: rgba(255, 77, 109, 0.15);
+    --bg: #030305;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --font-main: 'Montserrat', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-hand: 'Dancing Script', cursive;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+body { background-color: var(--bg); color: #fff; font-family: var(--font-main); overflow-x: hidden; width: 100vw; }
+
+.stars-fixed { position: fixed; inset: 0; background-image: radial-gradient(white 1px, transparent 1px); background-size: 50px 50px; opacity: 0.05; z-index: -3; }
+.nebula-bg { position: fixed; inset: 0; background: radial-gradient(circle at 20% 30%, #30021d 0%, transparent 40%), radial-gradient(circle at 80% 70%, #021a29 0%, transparent 40%); filter: blur(100px); z-index: -2; animation: nebulaPulse 10s infinite alternate; }
+@keyframes nebulaPulse { from { opacity: 0.6; } to { opacity: 1; } }
+.vignette-overlay { position: fixed; inset: 0; background: radial-gradient(circle at center, transparent 0%, #000 100%); z-index: -1; pointer-events: none; }
+
+#loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: 1.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.loader-content { text-align: center; width: 250px; }
+.heart-spinner { font-size: 3rem; animation: heartbeat 1.2s infinite; margin-bottom: 20px; }
+.load-bar { height: 2px; width: 100%; background: var(--glass); border-radius: 10px; overflow: hidden; margin-top: 15px; }
+#fill { height: 100%; width: 0%; background: var(--primary); transition: 0.2s; }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+.navbar { position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 30px 5%; backdrop-filter: blur(15px); background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border); }
+.nav-brand { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 900; letter-spacing: 3px; }
+.nav-brand span { color: var(--primary); }
+.nav-date { font-size: 0.8rem; opacity: 0.5; border-left: 1px solid var(--primary); padding-left: 15px; }
+
+.scene { min-height: 100vh; padding: 120px 8%; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
+.glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 30px; padding: 50px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); transition: 0.5s; }
+.glass-card:hover { border-color: rgba(255, 77, 109, 0.3); box-shadow: 0 25px 60px rgba(255, 77, 109, 0.1); }
+
+.title { font-family: var(--font-serif); font-size: clamp(2.8rem, 9vw, 6rem); line-height: 1; margin-bottom: 25px; }
+.title span { color: var(--primary); font-style: italic; text-shadow: 0 0 30px var(--primary-glow); }
+.fancy-text { font-family: var(--font-hand); font-size: 3.5rem; color: var(--primary-glow); margin-bottom: 25px; text-shadow: 0 0 20px rgba(255, 117, 143, 0.5); }
+
+.grid-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; width: 100%; max-width: 1200px; }
+.day-circle { width: 220px; height: 220px; border: 2px dashed var(--primary); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: rotateCircle 25s linear infinite; position: relative; z-index: 2; }
+.day-circle h3 { font-size: 5rem; color: var(--primary); line-height: 1; font-weight: 900; }
+@keyframes rotateCircle { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.moment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; }
+.m-card { background: var(--glass); border: 1px solid var(--border); padding: 50px 40px; border-radius: 25px; text-align: center; transition: 0.5s; backdrop-filter: blur(10px); }
+.m-card:hover { transform: translateY(-15px); border-color: var(--primary); }
+
+.heart-engine { position: relative; width: 220px; height: 220px; margin: 40px auto; }
+#activate-msg { position: absolute; inset: 55px; background: var(--primary); border: none; border-radius: 50%; font-size: 3.5rem; cursor: pointer; z-index: 10; box-shadow: 0 0 60px var(--primary); color: #fff; }
+.ring { position: absolute; inset: 0; border: 2px solid var(--primary); border-radius: 50%; animation: ripple 2.5s infinite; opacity: 0; }
+@keyframes ripple { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+
+.initials { font-family: var(--font-serif); font-size: 3rem; font-weight: 900; margin-bottom: 15px; }
+.initials span.heart-beat { color: var(--primary); display: inline-block; animation: heartBeatSmall 1.5s infinite; }
+@keyframes heartBeatSmall { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+#modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(20px); }
+
+/* --- [DIUBAH]: Styling Modal Window & Tombol Close agar Estetik --- */
+.modal-window { 
+    background: #0a0a0a; 
+    border: 1px solid var(--primary); 
+    padding: 70px 50px; 
+    border-radius: 40px; 
+    width: 100%; 
+    max-width: 650px; 
+    position: relative; /* Patokan posisi tombol X */
+    text-align: center; 
+}
+
+#close-modal {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.2); /* Samar diawal agar tidak kaku */
+    font-size: 2.2rem;
+    font-weight: 200;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    line-height: 1;
+}
+
+#close-modal:hover {
+    color: var(--primary);
+    transform: rotate(90deg) scale(1.1);
+    text-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* [ORIGINAL]: Responsif Mobile */
+@media (max-width: 768px) {
+    .scene { padding: 80px 6%; flex-direction: column; height: auto; }
+    .grid-layout { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+    .image-side { order: -1; display: flex; justify-content: center; }
+    .moment-grid { display: flex; flex-direction: column; align-items: center; }
+    .m-card { width: 100%; }
+    .title { font-size: 3rem; }
+    .fancy-text { font-size: 2.8rem; }
+    .nav-date { display: none; }
+    .modal-window { padding: 60px 20px; }
+    #close-modal { top: 15px; right: 20px; }
+}
